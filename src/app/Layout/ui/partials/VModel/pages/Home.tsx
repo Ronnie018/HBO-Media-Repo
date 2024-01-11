@@ -32,7 +32,7 @@ const Home = (props: Props) => {
         <Navigable
           bottom={"2.5%"}
           right={"27%"}
-          to="movies"
+          to="downloads"
           width={"6%"}
           height={"3%"}
         />
