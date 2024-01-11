@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 type NavigableProps = {
   top?: string;
@@ -12,10 +12,12 @@ type NavigableProps = {
 };
 
 const Navigable = ({ to, ...props }: NavigableProps) => {
+  const { device } = useParams();
+
   return (
     <Link
-      to={to}
-      className={classNames("out absolute")}
+      to={`/${device}/${to}`}
+      className={classNames("navigable out absolute")}
       style={{
         ...props,
       }}

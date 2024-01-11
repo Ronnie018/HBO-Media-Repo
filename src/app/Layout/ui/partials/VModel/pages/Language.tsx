@@ -10,15 +10,8 @@ const Language = (props: Props) => {
       <div className="controls absolute top-0 h-full w-full">
         <Navigable
           top={"4.5%"}
-          right={"3.5%"}
-          to="home"
-          width={"6%"}
-          height={"3%"}
-        />
-        <Navigable
-          top={"4.5%"}
           left={"3.5%"}
-          to="sidebar"
+          to="settings"
           width={"6%"}
           height={"3%"}
         />
@@ -32,14 +25,21 @@ const Language = (props: Props) => {
         <Navigable
           bottom={"2.5%"}
           right={"27%"}
-          to="movies"
+          to="downloads"
           width={"6%"}
           height={"3%"}
         />
         <Navigable
           bottom={"2.5%"}
           right={"7%"}
-          to="movies"
+          to="search"
+          width={"6%"}
+          height={"3%"}
+        />
+        <Navigable
+          bottom={"2.5%"}
+          left={"7%"}
+          to="home"
           width={"6%"}
           height={"3%"}
         />

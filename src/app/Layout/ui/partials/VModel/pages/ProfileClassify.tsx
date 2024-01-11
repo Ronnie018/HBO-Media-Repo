@@ -9,39 +9,11 @@ const ProfileClassify = (props: Props) => {
       <img className=" h-full" src={profile_classify} />
       <div className="controls absolute top-0 h-full w-full">
         <Navigable
-          top={"4.5%"}
-          right={"3.5%"}
+          top={"3%"}
+          right={"0%"}
           to="profile"
-          width={"6%"}
-          height={"3%"}
-        />
-        <Navigable
-          top={"4.5%"}
-          left={"3.5%"}
-          to="sidebar"
-          width={"6%"}
-          height={"3%"}
-        />
-        <Navigable
-          bottom={"2.5%"}
-          left={"27%"}
-          to="movies"
-          width={"6%"}
-          height={"3%"}
-        />
-        <Navigable
-          bottom={"2.5%"}
-          right={"27%"}
-          to="movies"
-          width={"6%"}
-          height={"3%"}
-        />
-        <Navigable
-          bottom={"2.5%"}
-          right={"7%"}
-          to="movies"
-          width={"6%"}
-          height={"3%"}
+          width={"100%"}
+          height={"75%"}
         />
       </div>
     </div>

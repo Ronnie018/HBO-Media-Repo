@@ -32,14 +32,21 @@ const Movies = (props: Props) => {
         <Navigable
           bottom={"2.5%"}
           right={"27%"}
-          to="movies"
+          to="downloads"
           width={"6%"}
           height={"3%"}
         />
         <Navigable
           bottom={"2.5%"}
           right={"7%"}
-          to="movies"
+          to="search"
+          width={"6%"}
+          height={"3%"}
+        />
+        <Navigable
+          bottom={"2.5%"}
+          left={"7%"}
+          to="home"
           width={"6%"}
           height={"3%"}
         />
