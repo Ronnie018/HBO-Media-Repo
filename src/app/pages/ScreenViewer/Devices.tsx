@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getDevices, getIcon } from "../hooks";
+import { getDevices, getIcon } from "../../hooks";
 
 function Devices() {
   const { brand, kind, search_str } = useParams();

@@ -9,6 +9,8 @@ export default {
       blue_light: "#5F7CFF",
       light_focus: "#2E54FF",
       white_ish: "#EDEDED",
+      white: "#fff",
+      black: "#000",
       dark_gray: "#232323",
     },
   },

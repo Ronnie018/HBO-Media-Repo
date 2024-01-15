@@ -7,3 +7,13 @@ export type Device = {
   slug: string;
   id: number;
 };
+
+export type NavLink = {
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  to: string;
+  width: string;
+  height: string;
+};
