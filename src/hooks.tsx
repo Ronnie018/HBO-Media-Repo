@@ -3,7 +3,7 @@ import { IoLogoAndroid, IoLogoApple } from "react-icons/io";
 import { MdDevicesOther } from "react-icons/md";
 import { FaChromecast } from "react-icons/fa";
 import { SiRoku } from "react-icons/si";
-import { Device } from "./types";
+import { Device } from "./app/types";
 
 export function getIcon(os: string, kind: string) {
   if (kind === "control") return <RiRemoteControl2Fill />;

@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import { Route, Routes } from "react-router-dom";
-import ScreenViewer from "@/app/pages/ScreenViewer";
-import ScreenCreator from "@/app/pages/ScreenCreator";
+import ScreenViewer from "@/pages/ScreenViewer";
+import ScreenCreator from "@/pages/ScreenCreator";
 
 export default function () {
   return (
