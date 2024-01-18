@@ -26,21 +26,16 @@ type RectGenProps = {
   height: number;
 };
 
-function generateRect({ id, y, x, width, height, ch, cw }: RectGenProps) {
-  const left = convertToPercentage(x, cw);
-  const top = convertToPercentage(y, ch);
-  const widthPercent = convertToPercentage(width, cw);
-  const heightPercent = convertToPercentage(height, ch);
-
+function generateRect({ id, y, x, width, height }: RectGenProps) {
   return (
     <Rect
       id={id}
       key={id}
       style={{
-        top: top + "%",
-        left: left + "%",
-        width: widthPercent + "%",
-        height: heightPercent + "%",
+        top: y + "%",
+        left: x + "%",
+        width: width + "%",
+        height: height + "%",
         position: "absolute",
         outline: "2px solid black",
       }}
@@ -48,22 +43,21 @@ function generateRect({ id, y, x, width, height, ch, cw }: RectGenProps) {
   );
 }
 
-const Canvas = ({ image, props }: any) => {
+const Canvas = ({ image, canvasRect, setCanvasRect, props }: any) => {
   const { rects, setRects } = useContext(ScreenCreatorContext);
 
+  const [client, setclient] = useState(0, 0);
+
   const canvasContainer = useRef(null);
-  const [canvasRect, setCanvasRect] = useState<DOMRect>();
 
   let mouseDown = false;
   let drawing = false;
   let Rect;
 
-  let used = false;
   useEffect(() => {
-    if (used || !window) return;
-    used = true;
+    if (!window) return;
     setCanvasRect(() => canvasContainer.current.getBoundingClientRect());
-  }, []);
+  }, [image]);
 
   function reset() {
     mouseDown = false;
@@ -83,11 +77,24 @@ const Canvas = ({ image, props }: any) => {
       ...state,
       {
         id: Rect.id,
-        x: Rect.style.left.replace("px", ""),
-        y: Rect.style.top.replace("px", ""),
-        width: Rect.style.width.replace("px", ""),
-        height: Rect.style.height.replace("px", ""),
+        x: convertToPercentage(
+          Rect.style.left.replace("px", ""),
+          canvasRect.width,
+        ),
+        y: convertToPercentage(
+          Rect.style.top.replace("px", ""),
+          canvasRect.height,
+        ),
+        width: convertToPercentage(
+          Rect.style.width.replace("px", ""),
+          canvasRect.width,
+        ),
+        height: convertToPercentage(
+          Rect.style.height.replace("px", ""),
+          canvasRect.height,
+        ),
         name: null,
+        to: null,
       },
     ]);
 
@@ -121,29 +128,31 @@ const Canvas = ({ image, props }: any) => {
   }
 
   return (
-    <section
-      ref={canvasContainer}
-      className="masked relative h-fit w-fit flex-1"
-      onMouseMove={handleMouseMove}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-    >
-      <img
-        src={image.src}
-        style={{
-          width: "300px",
-        }}
-        alt="screen"
-        className="pointer-events-none"
-      />
-      {rects.map(({ id, x, y, width, height }) => {
-        const ch = canvasRect.height;
-        const cw = canvasRect.width;
+    <>
+      <section
+        ref={canvasContainer}
+        className="masked relative h-fit w-fit mx-auto"
+        onMouseMove={handleMouseMove}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
+        <img
+          src={image.src}
+          style={{
+            width: "300px",
+          }}
+          alt="screen"
+          className="pointer-events-none"
+        />
+        {rects.map(({ id, x, y, width, height }) => {
+          const ch = canvasRect.height;
+          const cw = canvasRect.width;
 
-        return generateRect({ id, x, y, width, height, ch, cw });
-      })}
-    </section>
+          return generateRect({ id, x, y, width, height });
+        })}
+      </section>
+    </>
   );
 };
 

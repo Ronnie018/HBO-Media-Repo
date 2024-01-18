@@ -8,7 +8,7 @@ export default function () {
     <div className="h-screen bg-blue_dark">
       <Navbar />
 
-      <main className="container mx-auto mt-16 flex flex-wrap gap-16">
+      <main className="container mx-auto flex flex-wrap gap-16">
         <Routes>
           <Route path="/*" element={<ScreenViewer />} />
           <Route path="/create" element={<ScreenCreator />} />

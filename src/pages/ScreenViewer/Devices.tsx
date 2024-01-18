@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getDevices, getIcon } from "../../hooks";
 
 function Devices() {
@@ -11,15 +11,15 @@ function Devices() {
   return (
     <section className="flex flex-1 flex-col gap-4">
       {devices.map((device) => (
-        <a href={`/${device.slug}`}>
+        <Link to={`${device.slug}`} key={device.id}>
           <article
             className="flex w-full justify-between rounded-md bg-blue_light p-4 text-lg text-white_ish hover:bg-light_focus focus:bg-light_focus active:bg-light_focus
         "
           >
             <span>{device.name}</span>
-            <span>{getIcon(device.os, device.kind)}</span>
+            <span>{getIcon(device.os)}</span>
           </article>
-        </a>
+        </Link>
       ))}
     </section>
   );

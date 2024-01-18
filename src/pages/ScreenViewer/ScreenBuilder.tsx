@@ -1,23 +1,41 @@
+// @ts-nocheck
 import { useParams } from "react-router-dom";
-import Navigable from "./NavigableLink";
 import { NavLink } from "@/app/types";
+import Navigable from "./NavigableLink";
+import { useEffect, useRef, useState } from "react";
 
 type ScreenBuilderSelectorProps = {
-  flow: { [key: string]: NavLink[] };
+  flow: {
+    screens: {
+      [key: string]: NavLink[];
+    };
+    images: {
+      [key: string]: string;
+    };
+  };
   device: string;
 };
 
-export const ScreenBuilderSelector = ({
-  flow,
-  device,
-}: ScreenBuilderSelectorProps) => {
+export const ScreenBuilderSelector = ({ flow }: ScreenBuilderSelectorProps) => {
   const { screen } = useParams();
 
-  if (!screen) {
-    return <ScreenBuilder screen={flow.home} image="home" device={device} />;
-  }
+  const homeId = Object.keys(flow.screens)[0];
 
-  return <ScreenBuilder screen={flow[screen]} image={screen} device={device} />;
+  if (!screen) {
+    return (
+      <ScreenBuilder
+        screen={flow.screens[homeId]}
+        image={flow.images[homeId]}
+      />
+    );
+  } else {
+    return (
+      <ScreenBuilder
+        screen={flow.screens[screen]}
+        image={flow.images[screen]}
+      />
+    );
+  }
 };
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////// */
@@ -25,27 +43,35 @@ export const ScreenBuilderSelector = ({
 type ScreenBuilderProps = {
   screen: NavLink[];
   image: string;
-  device: string;
+  proportion: {
+    width: number;
+    height: number;
+  };
 };
 
 const ScreenBuilder = ({
   screen,
+  proportion,
   image,
-  device,
   ...rest
 }: ScreenBuilderProps) => {
-  console.log(screen);
+  const self = useRef(null);
+  const [canvasRect, setCanvasRect] = useState<DOMRect>();
+
+  let used = false;
+  useEffect(() => {
+    if (used || !window) return;
+    used = true;
+    setCanvasRect(() => self.current.getBoundingClientRect());
+  }, []);
 
   return (
-    <div className="relative mx-auto h-[36rem] w-max" {...rest}>
-      <img
-        className=" h-full"
-        src={`/images/devices/${device}/${image}.jpeg`}
-      />
+    <div ref={self} className="relative mx-auto h-[36rem] w-max" {...rest}>
+      <img className=" h-full" src={image} />
       <div className="controls absolute top-0 h-full w-full">
-        {screen.map((link) => (
-          <Navigable key={link.to} {...link} />
-        ))}
+        {screen.map((link) => {
+          return <Navigable key={link.id} {...link} />;
+        })}
       </div>
     </div>
   );

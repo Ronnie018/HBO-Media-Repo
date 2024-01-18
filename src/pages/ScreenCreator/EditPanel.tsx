@@ -1,17 +1,20 @@
 // @ts-nocheck
-import { useContext } from "react";
-import { ScreenCreatorContext } from ".";
+import { ChangeEvent, Dispatch, useContext } from "react";
+import { Rect, ScreenCreatorContext } from ".";
 
 const EditPanel = () => {
-  const { rects, setRects } = useContext(ScreenCreatorContext);
+  const { rects, setRects } = useContext<{
+    rects: Rect[];
+    setRects: Dispatch<React.SetStateAction<Rect[]>>;
+  }>(ScreenCreatorContext);
 
-  function handleNameChange(e, id) {
+  function handleNameChange(e: ChangeEvent<HTMLInputElement>, id: string) {
     setRects((state) =>
       state.map((r) => {
         if (r.id === id) {
           return {
             ...r,
-            name: e.target.value,
+            name: e.target.value as any,
           };
         }
         return r;
@@ -19,13 +22,13 @@ const EditPanel = () => {
     );
   }
 
-  function handleTopChange(e, id) {
+  function handleTopChange(e: ChangeEvent<HTMLInputElement>, id: string) {
     setRects((state) =>
       state.map((r) => {
         if (r.id === id) {
           return {
             ...r,
-            y: e.target.value,
+            y: e.target.value as any,
           };
         }
         return r;
@@ -33,13 +36,13 @@ const EditPanel = () => {
     );
   }
 
-  function handleLeftChange(e, id) {
+  function handleLeftChange(e: ChangeEvent<HTMLInputElement>, id: string) {
     setRects((state) =>
       state.map((r) => {
         if (r.id === id) {
           return {
             ...r,
-            x: e.target.value,
+            x: e.target.value as any,
           };
         }
         return r;
@@ -47,13 +50,13 @@ const EditPanel = () => {
     );
   }
 
-  function handleWidthChange(e, id) {
+  function handleWidthChange(e: ChangeEvent<HTMLInputElement>, id: string) {
     setRects((state) =>
       state.map((r) => {
         if (r.id === id) {
           return {
             ...r,
-            width: e.target.value,
+            width: e.target.value as any,
           };
         }
         return r;
@@ -61,13 +64,13 @@ const EditPanel = () => {
     );
   }
 
-  function handleHeightChange(e, id) {
+  function handleHeightChange(e: ChangeEvent<HTMLInputElement>, id: string) {
     setRects((state) =>
       state.map((r) => {
         if (r.id === id) {
           return {
             ...r,
-            height: e.target.value,
+            height: e.target.value as any,
           };
         }
         return r;
@@ -75,7 +78,7 @@ const EditPanel = () => {
     );
   }
 
-  function handleLinkToChange(e, id) {
+  function handleLinkToChange(e: ChangeEvent<HTMLInputElement>, id: string) {
     setRects((state) =>
       state.map((r) => {
         if (r.id === id) {
@@ -89,111 +92,114 @@ const EditPanel = () => {
     );
   }
 
-  function handleDeletion(id) {
+  function handleDeletion(id: string) {
     setRects((state) => state.filter((r) => r.id !== id));
   }
 
   return (
-    <section className="flex h-[800px] flex-1 flex-col gap-4 overflow-y-scroll">
-      {rects.map((rect) => (
-        <div key={rect.id}>
-          <label
-            htmlFor={"name" + rect.id}
-            className="w-15 flex justify-between gap-2"
-          >
-            Name:
-            <input
-              type="text"
-              name={"name" + rect.id}
-              id={"name" + rect.id}
-              onChange={(e) => handleNameChange(e, rect.id)}
-              className="w-40 rounded-sm bg-white_ish pl-4"
-            />
-          </label>
-          <label
-            htmlFor={"top" + rect.id}
-            className="w-15 flex justify-between gap-2"
-          >
-            Top:
-            <input
-              type="number"
-              name={"top" + rect.id}
-              id={"top" + rect.id}
-              onChange={(e) => handleTopChange(e, rect.id)}
-              placeholder="Top"
-              defaultValue={rect.y}
-              className="w-40 rounded-sm bg-white_ish pl-4"
-            />
-          </label>
+    <section className="overflow-auto flex max-h-[667px] flex-col w-[500px] gap-4">
+      <form>
+        {rects.map((rect) => (
+          <div key={rect.id}>
+            <label
+              htmlFor={"name" + rect.id}
+              className="w-15 flex justify-between gap-2"
+            >
+              Name:
+              <input
+                type="text"
+                name={"name" + rect.id}
+                id={"name" + rect.id}
+                onChange={(e) => handleNameChange(e, rect.id)}
+                className="w-40 rounded-sm bg-white_ish pl-4"
+              />
+            </label>
+            <label
+              htmlFor={"top" + rect.id}
+              className="w-15 flex justify-between gap-2"
+            >
+              Top:
+              <input
+                type="number"
+                name={"top" + rect.id}
+                id={"top" + rect.id}
+                onChange={(e) => handleTopChange(e, rect.id)}
+                placeholder="Top"
+                defaultValue={rect.y}
+                className="w-40 rounded-sm bg-white_ish pl-4"
+              />
+            </label>
 
-          <label
-            htmlFor={"left" + rect.id}
-            className="w-15 flex justify-between gap-2"
-          >
-            Left:
-            <input
-              type="number"
-              name={"left" + rect.id}
-              id={"left" + rect.id}
-              onChange={(e) => handleLeftChange(e, rect.id)}
-              placeholder="Left"
-              defaultValue={rect.x}
-              className="w-40 rounded-sm bg-white_ish pl-4"
-            />
-          </label>
+            <label
+              htmlFor={"left" + rect.id}
+              className="w-15 flex justify-between gap-2"
+            >
+              Left:
+              <input
+                type="number"
+                name={"left" + rect.id}
+                id={"left" + rect.id}
+                onChange={(e) => handleLeftChange(e, rect.id)}
+                placeholder="Left"
+                defaultValue={rect.x}
+                className="w-40 rounded-sm bg-white_ish pl-4"
+              />
+            </label>
 
-          <label
-            htmlFor={"width" + rect.id}
-            className="w-15 flex justify-between gap-2"
-          >
-            Width:
-            <input
-              type="number"
-              name={"width" + rect.id}
-              id={"width" + rect.id}
-              onChange={(e) => handleWidthChange(e, rect.id)}
-              placeholder="Width"
-              defaultValue={rect.width}
-              className="w-40 rounded-sm bg-white_ish pl-4"
-            />
-          </label>
+            <label
+              htmlFor={"width" + rect.id}
+              className="w-15 flex justify-between gap-2"
+            >
+              Width:
+              <input
+                type="number"
+                name={"width" + rect.id}
+                id={"width" + rect.id}
+                onChange={(e) => handleWidthChange(e, rect.id)}
+                placeholder="Width"
+                defaultValue={rect.width}
+                className="w-40 rounded-sm bg-white_ish pl-4"
+              />
+            </label>
 
-          <label
-            htmlFor={"height" + rect.id}
-            className="w-15 flex justify-between gap-2"
-          >
-            Height:
-            <input
-              type="number"
-              name={"height" + rect.id}
-              id={"height" + rect.id}
-              onChange={(e) => handleHeightChange(e, rect.id)}
-              placeholder="Height"
-              defaultValue={rect.height}
-              className="w-40 rounded-sm bg-white_ish pl-4"
-            />
-          </label>
-          <label
-            htmlFor={"linkto" + rect.id}
-            className="w-15 flex justify-between gap-2"
-          >
-            Link to:
-            <input
-              type="text"
-              name={"linkto" + rect.id}
-              id={"linkto" + rect.id}
-              onChange={(e) => handleLinkToChange(e, rect.id)}
-              className="w-40 rounded-sm bg-white_ish pl-4"
-            />
-          </label>
-          <button
-            className="bg-dark_gray p-2"
-            onClick={() => handleDeletion(rect.id)}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+            <label
+              htmlFor={"height" + rect.id}
+              className="w-15 flex justify-between gap-2"
+            >
+              Height:
+              <input
+                type="number"
+                name={"height" + rect.id}
+                id={"height" + rect.id}
+                onChange={(e) => handleHeightChange(e, rect.id)}
+                placeholder="Height"
+                defaultValue={rect.height}
+                className="w-40 rounded-sm bg-white_ish pl-4"
+              />
+            </label>
+            <label
+              htmlFor={"linkto" + rect.id}
+              className="w-15 flex justify-between gap-2"
+            >
+              Link to:
+              <input
+                type="text"
+                name={"linkto" + rect.id}
+                id={"linkto" + rect.id}
+                onChange={(e) => handleLinkToChange(e, rect.id)}
+                defaultValue={rect.to}
+                className="w-40 rounded-sm bg-white_ish pl-4"
+              />
+            </label>
+            <button
+              className="bg-dark_gray p-2"
+              onClick={() => handleDeletion(rect.id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </form>
     </section>
   );
 };

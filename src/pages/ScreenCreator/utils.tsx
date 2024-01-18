@@ -14,6 +14,10 @@ export const isInvalidRect = (rect: HTMLElement) =>
   !rect.style.width.replace("px", "") ||
   !rect.style.height.replace("px", "");
 
-export function convertToPercentage(n: number, containerMS: number) {
-  return (n / containerMS) * 100;
+export function convertToPercentage(
+  n: number,
+  containerMS: number,
+  correction = 0,
+) {
+  return (n / (containerMS + correction)) * 100;
 }

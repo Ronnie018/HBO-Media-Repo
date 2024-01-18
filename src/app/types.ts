@@ -1,7 +1,6 @@
 export type Device = {
   name: string;
   brand: string;
-  kind: string;
   model: string;
   os: string;
   slug: string;
@@ -9,11 +8,21 @@ export type Device = {
 };
 
 export type NavLink = {
-  top?: string;
-  left?: string;
-  right?: string;
-  bottom?: string;
+  y: number;
+  x: number;
   to: string;
-  width: string;
-  height: string;
+  name: string | null;
+  id: string;
+  width: number;
+  height: number;
+};
+
+export type Rect = {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  name: string | null;
+  to: string | null;
 };

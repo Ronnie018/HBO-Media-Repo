@@ -1,17 +1,17 @@
+// @ts-nocheck
+import { NavLink } from "@/app/types";
 import classNames from "classnames";
 import { Link, useParams } from "react-router-dom";
+import { convertToPercentage } from "../ScreenCreator/utils";
 
-type NavigableProps = {
-  top?: string;
-  left?: string;
-  right?: string;
-  bottom?: string;
-  to: string;
-  height: string;
-  width: string;
-};
-
-const Navigable = ({ to, ...props }: NavigableProps) => {
+const Navigable = ({
+  to,
+  x,
+  y,
+  width,
+  height,
+  ...props
+}: NavLink & { ch: number; cw: number }) => {
   const { device } = useParams();
 
   return (
@@ -19,7 +19,10 @@ const Navigable = ({ to, ...props }: NavigableProps) => {
       to={`/${device}/${to}`}
       className={classNames("navigable out absolute")}
       style={{
-        ...props,
+        top: y + "%",
+        left: x + "%",
+        width: width + "%",
+        height: height + "%",
       }}
     />
   );
