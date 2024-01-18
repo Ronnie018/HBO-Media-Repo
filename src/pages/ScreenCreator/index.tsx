@@ -7,7 +7,7 @@ import EditPanel from "./EditPanel";
 import { MdExpandCircleDown, MdHeight } from "react-icons/md";
 import { Rect } from "@/app/types";
 import { IoIosCloseCircle } from "react-icons/io";
-import SaveModal from './SaveModal';
+import SaveModal from "./SaveModal";
 
 export const ScreenCreatorContext = createContext(null);
 
@@ -34,6 +34,8 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   const [saving, setSaving] = useState<boolean>(false);
 
   const [flow, setFlow] = useState(null);
+
+  const [activeRect, setActiveRect] = useState(null);
 
   function handleFileChange(e) {
     const file = e.target.files[0];
@@ -71,7 +73,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
       obj.screens[screen.id] = _rects[screen.id];
     });
 
-    setSaving(true);  
+    setSaving(true);
   }
 
   return (
@@ -81,6 +83,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
         <div className="max-w-2xl flex-1">
           {screens && screens.length > 0 && (
             <Canvas
+              active={activeRect}
               rects={rects}
               setRects={setRects}
               image={currentScreen}
@@ -89,7 +92,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
             />
           )}
         </div>
-        <EditPanel />
+        <EditPanel setActiveRect={setActiveRect} />
       </div>
       <div className="container absolute z-50 flex w-full gap-4 bg-dark_gray">
         <div className="flex flex-shrink flex-col justify-between">
