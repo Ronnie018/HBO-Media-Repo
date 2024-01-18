@@ -2,7 +2,11 @@
 import { ChangeEvent, Dispatch, useContext } from "react";
 import { Rect, ScreenCreatorContext } from ".";
 
-const EditPanel = () => {
+const EditPanel = ({
+  setActiveRect,
+}: {
+  setActiveRect: Dispatch<React.SetStateAction<string | null>>;
+}) => {
   const { rects, setRects } = useContext<{
     rects: Rect[];
     setRects: Dispatch<React.SetStateAction<Rect[]>>;
@@ -97,10 +101,14 @@ const EditPanel = () => {
   }
 
   return (
-    <section className="overflow-auto flex max-h-[667px] flex-col w-[500px] gap-4">
+    <section className="flex max-h-[667px] w-[500px] flex-col gap-4 overflow-auto">
       <form>
         {rects.map((rect) => (
-          <div key={rect.id}>
+          <div
+            key={rect.id}
+            onMouseOver={() => setActiveRect(rect.id)}
+            onMouseLeave={() => setActiveRect(null)}
+          >
             <label
               htmlFor={"name" + rect.id}
               className="w-15 flex justify-between gap-2"

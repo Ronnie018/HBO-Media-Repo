@@ -26,7 +26,7 @@ type RectGenProps = {
   height: number;
 };
 
-function generateRect({ id, y, x, width, height }: RectGenProps) {
+function generateRect({ id, y, x, width, height, active }: RectGenProps) {
   return (
     <Rect
       id={id}
@@ -37,13 +37,14 @@ function generateRect({ id, y, x, width, height }: RectGenProps) {
         width: width + "%",
         height: height + "%",
         position: "absolute",
-        outline: "2px solid black",
+        outline: active ? "3px solid purple" : "2px dashed black",
+        background: active && "#5910a254",
       }}
     />
   );
 }
 
-const Canvas = ({ image, canvasRect, setCanvasRect, props }: any) => {
+const Canvas = ({ image, canvasRect, setCanvasRect, active, props }: any) => {
   const { rects, setRects } = useContext(ScreenCreatorContext);
 
   const [client, setclient] = useState(0, 0);
@@ -131,7 +132,7 @@ const Canvas = ({ image, canvasRect, setCanvasRect, props }: any) => {
     <>
       <section
         ref={canvasContainer}
-        className="masked relative h-fit w-fit mx-auto"
+        className="masked relative mx-auto h-fit w-fit"
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -149,7 +150,14 @@ const Canvas = ({ image, canvasRect, setCanvasRect, props }: any) => {
           const ch = canvasRect.height;
           const cw = canvasRect.width;
 
-          return generateRect({ id, x, y, width, height });
+          return generateRect({
+            id,
+            x,
+            y,
+            width,
+            height,
+            active: id == active,
+          });
         })}
       </section>
     </>
