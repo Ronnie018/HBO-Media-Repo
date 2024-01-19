@@ -36,36 +36,50 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   const [flow, setFlow] = useState(null);
 
   const [activeRect, setActiveRect] = useState(null);
-
+  
   function handleFileChange(e) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.src = e.target.result;
-      img.onload = () => {
-        const id = uuid();
-        setScreens((state) => [
-          ...state,
-          {
-            img,
-            src: img.src,
-            id,
-          },
-        ]);
-        _rects[id] = [];
-        _images[id] = img.src;
+    const { files } = e.target;
 
-        if (!currentScreen) {
-          setCurrentScreen(() => ({
-            img,
-            src: img.src,
-            id,
-          }));
-        }
-      };
+    const processFile = (file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            const id = uuid();
+            setScreens((state) => [
+              ...state,
+              {
+                img,
+                src: img.src,
+                id,
+              },
+            ]);
+            _rects[id] = [];
+            _images[id] = img.src;
+
+            if (!currentScreen) {
+              setCurrentScreen(() => ({
+                img,
+                src: img.src,
+                id,
+              }));
+            }
+            resolve();
+          };
+        };
+        reader.readAsDataURL(file);
+      });
     };
-    reader.readAsDataURL(file);
+
+    const processFilesSequentially = async () => {
+      for (let i = 0; i < files.length; i++) {
+        await processFile(files[i]);
+      }
+    };
+
+    processFilesSequentially();
   }
 
   function handleSave(e: any) {
@@ -102,6 +116,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
           >
             <input
               type="file"
+              multiple
               id="screen"
               name="screen"
               accept="image/png, image/jpeg"
