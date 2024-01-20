@@ -4,7 +4,8 @@ import ScreenViewer from "@/pages/ScreenViewer";
 import ScreenCreator from "@/pages/ScreenCreator";
 
 export default function () {
-  const testArr = new Array(11).fill(0);
+  const mobileArr = new Array(11).fill(0);
+  const desktopArr = new Array(14).fill(0);
 
   return (
     <div className="h-screen bg-blue_dark">
@@ -15,11 +16,29 @@ export default function () {
           <Route path="/*" element={<ScreenViewer />} />
           <Route path="/create" element={<ScreenCreator />} />
           <Route
-            path="/teste"
+            path="/mobile"
             element={
-              <div className='flex flex-wrap'>
-                {testArr.map((_, i) => (
-                  <img src={"/model/" + (i + 1) + ".jpeg"} alt="" width={200} />
+              <div className="flex flex-wrap">
+                {mobileArr.map((_, i) => (
+                  <img
+                    src={"/mobile/" + (i + 1) + ".jpeg"}
+                    alt=""
+                    width={200}
+                  />
+                ))}
+              </div>
+            }
+          />
+          <Route
+            path="/desktop"
+            element={
+              <div className="flex flex-wrap">
+                {desktopArr.map((_, i) => (
+                  <img
+                    src={"/desktop/" + (i + 1) + ".png"}
+                    alt=""
+                    width={200}
+                  />
                 ))}
               </div>
             }
