@@ -141,7 +141,7 @@ const Canvas = ({ image, canvasRect, setCanvasRect, active, props }: any) => {
         <img
           src={image.src}
           style={{
-            width: "300px",
+            width: image.img.width < image.img.height ? "300px" : "900px",
           }}
           alt="screen"
           className="pointer-events-none"
