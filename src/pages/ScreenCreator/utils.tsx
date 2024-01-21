@@ -1,6 +1,12 @@
 import { v4 as uuid } from "uuid";
 
-const rectClassNames = ["out", "absolute", "navlink-rect"];
+const rectClassNames = [
+  "outline",
+  "outline-blue_light",
+  "outline-2",
+  "absolute",
+  "navlink-rect",
+];
 
 export const createNewRect = () => {
   const rect = document.createElement("div");
