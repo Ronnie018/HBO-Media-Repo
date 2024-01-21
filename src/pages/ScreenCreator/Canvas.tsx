@@ -140,10 +140,8 @@ const Canvas = ({ image, canvasRect, setCanvasRect, active, props }: any) => {
       >
         <img
           src={image.src}
-          // incognito
           style={{
-            width: (image.width * canvasRect.width) / image.height,
-            height: canvasRect.height,
+            width: image.img.width < image.img.height ? "300px" : "900px",
           }}
           alt="screen"
           className="pointer-events-none"

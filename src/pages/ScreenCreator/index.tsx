@@ -36,7 +36,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   const [flow, setFlow] = useState(null);
 
   const [activeRect, setActiveRect] = useState(null);
-  
+
   function handleFileChange(e) {
     const { files } = e.target;
 
@@ -83,6 +83,8 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   }
 
   function handleSave(e: any) {
+    _rects[currentScreen.id] = [...rects];
+    
     screens.forEach((screen) => {
       obj.screens[screen.id] = _rects[screen.id];
     });
