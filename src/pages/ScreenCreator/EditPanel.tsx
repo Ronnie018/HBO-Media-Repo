@@ -101,7 +101,7 @@ const EditPanel = ({
   }
 
   return (
-    <section className="flex max-h-[667px] w-[500px] flex-col gap-4 overflow-auto">
+    <section className="flex max-h-[600px] w-[500px] flex-col gap-4 overflow-y-scroll resize-y">
       <form>
         {rects.map((rect) => (
           <div

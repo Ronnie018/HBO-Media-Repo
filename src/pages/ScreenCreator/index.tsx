@@ -82,9 +82,14 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
     processFilesSequentially();
   }
 
+  function handleClipboard(id: string) {
+    navigator.clipboard.writeText(id);
+    setExpanded(false);
+  }
+
   function handleSave(e: any) {
     _rects[currentScreen.id] = [...rects];
-    
+
     screens.forEach((screen) => {
       obj.screens[screen.id] = _rects[screen.id];
     });
@@ -95,7 +100,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   return (
     <ScreenCreatorContext.Provider value={{ rects, setRects }}>
       {saving && <SaveModal setSaving={setSaving} object={obj} />}
-      <div className="mt-8 flex w-full justify-center gap-4">
+      <div className="noselect mt-8 flex w-full justify-center gap-4">
         <div className="max-w-2xl flex-1">
           {screens && screens.length > 0 && (
             <Canvas
@@ -150,7 +155,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
                   }}
                 />
                 <button
-                  onClick={() => navigator.clipboard.writeText(screen.id)}
+                  onClick={() => handleClipboard(screen.id)}
                   className="transition-opacity hover:underline active:bg-light_focus"
                 >
                   {screen.id.substring(0, 8)}...
@@ -164,9 +169,9 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
           onClick={() => setExpanded((state) => !state)}
         >
           {expanded ? (
-            <IoIosCloseCircle size={30} />
+            <IoIosCloseCircle size={30} className="text-white_ish" />
           ) : (
-            <MdExpandCircleDown size={30} />
+            <MdExpandCircleDown size={30} className="text-white_ish" />
           )}
         </button>
       </div>

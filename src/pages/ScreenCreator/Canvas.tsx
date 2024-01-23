@@ -1,7 +1,12 @@
 // @ts-nocheck
 
 import { useContext, useEffect, useRef, useState } from "react";
-import { createNewRect, isInvalidRect, convertToPercentage } from "./utils";
+import {
+  createNewRect,
+  isInvalidRect,
+  convertToPercentage,
+  removeOrphans,
+} from "./utils";
 import { ScreenCreatorContext } from ".";
 
 type RectProps = {
@@ -64,9 +69,9 @@ const Canvas = ({ image, canvasRect, setCanvasRect, active, props }: any) => {
     mouseDown = false;
     drawing = false;
 
-    if (Rect) {
-      canvasContainer.current.removeChild(Rect);
-    }
+    try {
+      if (Rect) canvasContainer.current.removeChild(Rect);
+    } catch (e) {}
   }
 
   /* HANDLERS */
@@ -102,12 +107,10 @@ const Canvas = ({ image, canvasRect, setCanvasRect, active, props }: any) => {
     reset();
   }
 
-  function handleMouseLeave() {
-    if (isInvalidRect(Rect)) return;
-    canvasContainer.current.removeChild(canvasContainer.current.lastChild);
-
-    reset();
-  }
+  const handleMouseLeave = () => {
+    removeOrphans();
+    !isInvalidRect(Rect) && reset();
+  };
 
   function handleMouseDown(e) {
     Rect = createNewRect();
@@ -141,7 +144,7 @@ const Canvas = ({ image, canvasRect, setCanvasRect, active, props }: any) => {
         <img
           src={image.src}
           style={{
-            width: image.img.width < image.img.height ? "300px" : "900px",
+            width: image.img.width < image.img.height ? "220px" : "900px",
           }}
           alt="screen"
           className="pointer-events-none"
