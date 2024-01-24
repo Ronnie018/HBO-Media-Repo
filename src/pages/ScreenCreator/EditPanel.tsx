@@ -101,7 +101,7 @@ const EditPanel = ({
   }
 
   return (
-    <section className="flex max-h-[600px] w-[500px] flex-col gap-4 overflow-y-scroll resize-y">
+    <section className="flex max-h-[600px] w-[500px] resize-y flex-col gap-4 overflow-y-scroll">
       <form>
         {rects.map((rect) => (
           <div
@@ -129,6 +129,7 @@ const EditPanel = ({
               Top:
               <input
                 type="number"
+                step={0.5}
                 name={"top" + rect.id}
                 id={"top" + rect.id}
                 onChange={(e) => handleTopChange(e, rect.id)}
@@ -145,6 +146,7 @@ const EditPanel = ({
               Left:
               <input
                 type="number"
+                step={0.5}
                 name={"left" + rect.id}
                 id={"left" + rect.id}
                 onChange={(e) => handleLeftChange(e, rect.id)}
@@ -161,6 +163,7 @@ const EditPanel = ({
               Width:
               <input
                 type="number"
+                step={0.5}
                 name={"width" + rect.id}
                 id={"width" + rect.id}
                 onChange={(e) => handleWidthChange(e, rect.id)}
@@ -177,6 +180,7 @@ const EditPanel = ({
               Height:
               <input
                 type="number"
+                step={0.5}
                 name={"height" + rect.id}
                 id={"height" + rect.id}
                 onChange={(e) => handleHeightChange(e, rect.id)}
