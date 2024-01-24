@@ -3,8 +3,7 @@ export type Device = {
   brand: string;
   model: string;
   os: string;
-  slug: string;
-  id: number;
+  id: string;
 };
 
 export type NavLink = {
