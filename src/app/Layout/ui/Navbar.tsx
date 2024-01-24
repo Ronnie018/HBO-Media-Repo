@@ -14,7 +14,7 @@ const NavbarLink = ({ to, text }: { to: string; text?: string }) => {
 
 export default function Navbar() {
   return (
-    <nav className="flex h-20 items-center bg-blue_main">
+    <nav className="mb-4 flex h-20 items-center bg-blue_main">
       <div className="container mx-auto flex items-center justify-between gap-4">
         <Searchbar />
         <div className="flex items-center justify-normal gap-4">
