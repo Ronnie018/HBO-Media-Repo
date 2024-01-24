@@ -1,24 +1,48 @@
 // @ts-nocheck
-import { lazy, useState } from "react";
+import { lazy, useState, useEffect } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import ScreenBuilder, { ScreenBuilderSelector } from "./ScreenBuilder";
 import { NavLink } from "@/app/types";
 
-import flows from "./flows.json";
-
-function getNavigationFlow(deviceName?: string): {
+function getNavigationFlow(deviceName?: string): Promise<{
   screens: { [key: string]: NavLink[] };
   images: { [key: string]: string };
-} {
-  return import(`./flows/${deviceName}.json`);
+}> {
+  return import(`./data/flows/${deviceName}.json`);
+}
+
+function useWait(cb: () => Promise<any>) {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await cb();
+        setData(result);
+      } catch (error) {
+        console.error("Error loading data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [cb]);
+
+  return [loading, data];
 }
 
 const DeviceViewer = () => {
   const { device } = useParams();
 
-  const flow = getNavigationFlow(device);
+  const [loading, flow] = useWait(() => getNavigationFlow(device));
 
-  const homeId = Object.keys(flow.screens)[0];
+  const homeId = Object.keys(flow?.screens || {})[0];
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Routes>
@@ -26,8 +50,8 @@ const DeviceViewer = () => {
         path="/*"
         element={
           <ScreenBuilder
-            screen={flow.screens[homeId]}
-            image={flow.images[homeId]}
+            screen={flow?.screens[homeId]}
+            image={flow?.images[homeId]}
           />
         }
       />
