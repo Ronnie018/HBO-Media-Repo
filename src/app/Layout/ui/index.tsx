@@ -15,7 +15,7 @@ export default function () {
         <Routes>
           <Route path="/*" element={<ScreenViewer />} />
           <Route path="/create" element={<ScreenCreator />} />
-          <Route
+          {/* <Route
             path="/mobile"
             element={
               <div className="flex flex-wrap">
@@ -28,7 +28,7 @@ export default function () {
                 ))}
               </div>
             }
-          />
+          />*/}
           <Route
             path="/desktop"
             element={

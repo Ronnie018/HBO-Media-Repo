@@ -11,7 +11,7 @@ function Devices() {
   return (
     <section className="flex flex-1 flex-col gap-4">
       {devices.map((device) => (
-        <Link to={`${device.slug}`} key={device.id}>
+        <Link to={`${device.id}`} key={device.id}>
           <article
             className="flex w-full justify-between rounded-md bg-blue_light p-4 text-lg text-white_ish hover:bg-light_focus focus:bg-light_focus active:bg-light_focus
         "
