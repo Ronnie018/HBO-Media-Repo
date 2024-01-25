@@ -5,7 +5,7 @@ import ScreenCreator from "@/pages/ScreenCreator";
 
 export default function () {
   // const mobileArr = new Array(11).fill(0);
-  const desktopArr = new Array(14).fill(0);
+  const desktopArr = new Array(15).fill(0);
 
   return (
     <div className="h-screen bg-blue_dark">
