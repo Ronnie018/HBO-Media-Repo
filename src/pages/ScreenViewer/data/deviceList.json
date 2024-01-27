@@ -12,5 +12,12 @@
     "model": "N/A",
     "os": "Ubuntu",
     "id": "185c1629-72b7-4bb1-a5bb-96de95fb55ae"
+  },
+  {
+    "name": "Cancelamento - Android",
+    "brand": "N/A",
+    "model": "N/A",
+    "os": "android",
+    "id": "ae3f2e1a-55c2-4076-8d5b-8ef5827b0b06"
   }
 ]
