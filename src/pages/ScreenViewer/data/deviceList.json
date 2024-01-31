@@ -3,28 +3,32 @@
     "name": "Mobile App",
     "brand": "LG",
     "model": "N/A",
-    "os": "Android",
-    "id": "9117f120-6e04-4616-a0f0-7b1e7de48dd4"
+    "os": "android",
+    "id": "9117f120-6e04-4616-a0f0-7b1e7de48dd4",
+    "type": "flow"
   },
   {
     "name": "Desktop Flow",
     "brand": "N/A",
     "model": "N/A",
-    "os": "Ubuntu",
-    "id": "185c1629-72b7-4bb1-a5bb-96de95fb55ae"
+    "os": "linux",
+    "id": "185c1629-72b7-4bb1-a5bb-96de95fb55ae",
+    "type": "flow"
   },
   {
     "name": "Cancelamento - Android",
     "brand": "N/A",
     "model": "N/A",
     "os": "android",
-    "id": "ae3f2e1a-55c2-4076-8d5b-8ef5827b0b06"
+    "id": "ae3f2e1a-55c2-4076-8d5b-8ef5827b0b06",
+    "type": "process"
   },
- {
-   "name": "Cancellation - Iphone",
-   "brand": "Iphone",
-   "model": "N/A",
-   "os": "IOS",
-   "id": "7a7c2ccd-5cdb-4868-aeaf-b7827a9a70af"
- }
+  {
+    "name": "Cancellation - Iphone",
+    "brand": "Iphone",
+    "model": "N/A",
+    "os": "ios",
+    "id": "7a7c2ccd-5cdb-4868-aeaf-b7827a9a70af",
+    "type": "process"
+  }
 ]

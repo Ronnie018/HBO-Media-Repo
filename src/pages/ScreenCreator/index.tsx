@@ -164,6 +164,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
             ))}
           </div>
         )}
+
         <button
           className="absolute bottom-0 right-2 flex items-center justify-center"
           onClick={() => setExpanded((state) => !state)}

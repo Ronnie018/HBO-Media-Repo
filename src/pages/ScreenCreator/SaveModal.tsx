@@ -14,14 +14,16 @@ const SaveModal = ({ setSaving, object }: Props) => {
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [os, setOs] = useState("");
+  const [type, setType] = useState("app-flow");
 
   let obj = {
     name,
     brand,
     model,
     os,
-    flow: object,
+    type,
     id,
+    flow: object,
   };
 
   function handleSave(e: any) {
@@ -76,6 +78,20 @@ const SaveModal = ({ setSaving, object }: Props) => {
           value={os}
           onChange={(e) => setOs(e.target.value)}
         />
+      </label>
+
+      <label htmlFor="type">
+        type
+        <br />
+        <select
+          name="type"
+          id="type"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="app-flow">App flow</option>
+          <option value="resolution">Process</option>
+        </select>
       </label>
 
       <button className="rounded-sm bg-light_focus p-2" onClick={handleSave}>

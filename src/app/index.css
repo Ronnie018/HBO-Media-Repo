@@ -24,7 +24,7 @@
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"], select {
   @apply bg-blue_dark font-thin;
 }
 

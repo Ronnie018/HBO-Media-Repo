@@ -4,7 +4,6 @@ import ScreenViewer from "@/pages/ScreenViewer";
 import ScreenCreator from "@/pages/ScreenCreator";
 
 export default function () {
-
   return (
     <div className="h-screen bg-blue_dark">
       <Navbar />

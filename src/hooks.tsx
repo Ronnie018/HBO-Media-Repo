@@ -21,10 +21,10 @@ export function getIcon(os: string) {
 
 import deviceList from "./pages/ScreenViewer/data/deviceList.json";
 
-export function getDevices(brand = null, search_str = null): Device[] {
+export function getDevices(os = null, search_str = null): Device[] {
   return (deviceList as Device[]).filter(
     (device) =>
-      (brand === null || device.brand === brand) &&
+      (os === null || device.os === os) &&
       (search_str === null ||
         device.name.toLowerCase().includes(search_str) ||
         device.model.toLowerCase().includes(search_str) ||
