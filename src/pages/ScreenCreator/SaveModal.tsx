@@ -29,7 +29,23 @@ const SaveModal = ({ setSaving, object }: Props) => {
   function handleSave(e: any) {
     e.preventDefault();
 
-    navigator.clipboard.writeText(JSON.stringify(obj, null, 2));
+    // Convert object to JSON string
+    const jsonString = JSON.stringify(obj, null, 2);
+
+    // Create a Blob with the JSON string
+    const blob = new Blob([jsonString], { type: "application/json" });
+
+    // Create a download link
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = `${obj.name}.json`;
+
+    // Append the link to the body and click it to trigger the download
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    // Remove the download link from the body
+    document.body.removeChild(downloadLink);
 
     setSaving(false);
   }

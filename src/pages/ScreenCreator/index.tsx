@@ -8,6 +8,7 @@ import { MdExpandCircleDown, MdHeight } from "react-icons/md";
 import { Rect } from "@/app/types";
 import { IoIosCloseCircle } from "react-icons/io";
 import SaveModal from "./SaveModal";
+import WelcomeModalCreate from './WelcomeModalCreate';
 
 export const ScreenCreatorContext = createContext(null);
 
@@ -27,7 +28,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   const [screens, setScreens] = useState<any>([]);
   const [rects, setRects] = useState<Rect[]>([]);
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const [canvasRect, setCanvasRect] = useState<DOMRect>();
 
@@ -100,6 +101,7 @@ const ScreenCreator = (props: ScreenCreatorProps) => {
   return (
     <ScreenCreatorContext.Provider value={{ rects, setRects }}>
       {saving && <SaveModal setSaving={setSaving} object={obj} />}
+      <WelcomeModalCreate />
       <div className="noselect mt-8 flex w-full justify-center gap-4">
         <div className="max-w-2xl flex-1">
           {screens && screens.length > 0 && (
