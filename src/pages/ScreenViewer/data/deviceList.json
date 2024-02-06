@@ -1,6 +1,6 @@
 [
   {
-    "name": "Mobile App",
+    "name": "Mobile App Flow",
     "brand": "LG",
     "model": "N/A",
     "os": "android",
@@ -30,5 +30,13 @@
     "os": "ios",
     "id": "7a7c2ccd-5cdb-4868-aeaf-b7827a9a70af",
     "type": "process"
+  },
+  {
+    "name": "SmartTV App",
+    "brand": "TCL",
+    "model": "N/A",
+    "os": "N/A",
+    "type": "app-flow",
+    "id": "fc63de0d-b00e-4674-9b3b-d7cec7afeff5"
   }
 ]
